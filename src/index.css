@@ -148,10 +148,21 @@ body {
   transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
+@media (max-width: 600px) {
+  .buttons-container {
+    flex-direction: column;
+  }
+}
+
+
+
+
+
+
 .show-map-button {
-  position: absolute;
+  position: relative;
   left: 10px;
-  top: 65px;
+  top: 1px;
   cursor: pointer;
   transition: background-color 0.3s;
   margin-bottom: 10px;

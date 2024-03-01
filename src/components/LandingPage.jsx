@@ -31,16 +31,16 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="flex-1 bg-ghostwhite flex flex-col items-center justify-start pt-[100px] px-5 pb-[30px] box-border gap-[55px] max-w-full text-center text-31xl text-darkslateblue font-righteous mq750:gap-[87px] mq750:pt-[20px] mq750:pb-[15px] mq750:box-border">
-      <div className="w-[950px] flex flex-col items-center justify-start gap-[14px] max-w-full">
-        <h1 className="m-0 w-[100%] self-stretch h-[150px] relative text-inherit leading-[152.02%] font-normal font-inherit inline-block mq450:text-11xl mq450:leading-[46px] mq1050:text-21xl mq1050:leading-[61px] p-4">
-          Empowering Informed Choices with Verified Real Estate Data
-        </h1>
-        <div className="w-[550px] h-[30px] relative text-xl leading-[182.02%] font-manrope text-black inline-block max-w-full mq450:text-base mq450:leading-[24px] p-2">
-          Filter the noise. Get access to verified property listings and
-          comprehensive real estate data.
-        </div>
+  <div className="flex flex-col items-center justify-center h-[75vh]   bg-blue-50">
+     
+      <h1 className="text-3x1 font-righteous text-darkslateblue max-w-[100%] lg:max-w-[80%] text-center pb-10 ">
+        Empowering Informed Choices with Verified Real Estate Data
+      </h1>
+      <div className="text-xl lg:text-2xl font-manrope text-black max-w-[100%] lg:max-w-[50%] text-center pb-6 mx-auto">
+        Filter the noise. Get access to verified property listings and
+        comprehensive real estate data.
       </div>
+     
       <div className="w-full max-w-[996px] h-[85px] flex flex-row items-center justify-between pt-3 pb-[11px] pr-3 pl-7 box-border sticky gap-[20px] top-[0] z-[99]   text-left text-xl text-black font-manrope">
         <div className="relative flex items-center justify-start w-full">
           <div className="relative flex w-full">

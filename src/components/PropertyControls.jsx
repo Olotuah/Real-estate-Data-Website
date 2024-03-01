@@ -87,25 +87,30 @@ const handleIncreaseMaxAge = () => {
         />
       </div>
 
-      {/* Filter and Compare Buttons */}
-      <div style={{ position: 'absolute', top: '65px', right: '-10px', display: 'flex', gap: '10px' }}>
-        {/* Filter Button */}
-        <button onClick={handleFilterClick} className="filter-button">
-          <FaFilter style={{ marginRight: '5px' }} /> Filter
-        </button>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+  {/* Show Map Button */}
+  <Link to="/MapView" style={{ textDecoration: 'none' }}>
+    <button className="show-map-button" style={{ padding: '0.7em', marginRight: '1em', whiteSpace: 'nowrap' }}>
+      <FaMapMarkedAlt style={{ marginRight: '0.5em' }} /> Show Map
+    </button>
+  </Link>
 
-        {/* Compare Button */}
-        <button onClick={handleCompareClick} className="compare-button">
-          <FaBalanceScale style={{ marginRight: '5px' }} /> Compare
-        </button>
-      </div>
+  {/* Filter and Compare Buttons */}
+  <div style={{ display: 'flex', gap: '1px' }}>
+    {/* Compare Button */}
+    <button onClick={handleCompareClick} className="compare-button" style={{ padding: '0.7em', marginRight: '1em' }}>
+      <FaBalanceScale style={{ marginRight: '0.5em' }} /> Compare
+    </button>
+    
+    {/* Filter Button */}
+    <button onClick={handleFilterClick} className="filter-button" style={{ padding: '1em' }}>
+      <FaFilter style={{ marginRight: '0.5em' }} /> Filter
+    </button>
+  </div>
 
-      {/* Show Map Button */}
-      <Link to="/MapView" style={{ textDecoration: 'none' }}>
-        <button className="show-map-button">
-          <FaMapMarkedAlt style={{ marginRight: '5px' }} /> Show Map
-        </button>
-      </Link>
+</div>
+
+       
 
 {/* Filter Dropdown */}
 {showFilter && (

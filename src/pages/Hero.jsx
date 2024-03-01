@@ -2,7 +2,7 @@ import InnerFrame from "../components/InnerFrame";
 
 const Hero = () => {
   return (
-    <div className="w-full relative bg-white overflow-hidden flex flex-col items-center justify-start gap-[-20px] tracking-[normal] text-center text-31xl text-darkslateblue font-righteous">
+    <div className="w-full relative bg-white overflow-hidden flex flex-col items-center justify-start gap-[1px] tracking-[normal] text-center text-31xl text-darkslateblue font-righteous ">
       <InnerFrame />
       <div className="w-[584px] flex flex-row flex-wrap items-center justify-start py-0 px-5 box-border gap-[7px] max-w-full">
         <h1 className="m-0 flex-1 relative text-inherit leading-[152.02%] font-normal font-inherit inline-block min-w-[311px] max-w-full mq450:text-11xl mq450:leading-[46px] mq1050:text-21xl mq1050:leading-[61px]">

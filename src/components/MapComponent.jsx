@@ -191,8 +191,8 @@ const MapComponent = ({ showPropertyListing, togglePropertyListing }) => {
           <PropertyCard property={selectedProperty} />
         </div>
       )}
-
-      {/* Filter Container */}
+      <div className="buttons-container" style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+      {/* Show Crime Rate */}
       <div className="filter-container" style={{ position: 'absolute', top: '10px', left: '60px', backgroundColor: 'white', padding: '8px', borderRadius: '50px', zIndex: '1000', fontSize: '12px' }}>
         <label>
           <input type="checkbox" checked={showCrimeRate} onChange={() => setShowCrimeRate(!showCrimeRate)} />
@@ -235,6 +235,7 @@ const MapComponent = ({ showPropertyListing, togglePropertyListing }) => {
           <div style={{ marginLeft: '6px', color: 'red' }}>Churches</div>
           <FontAwesomeIcon icon={faTimes} style={{ marginLeft: '6px', fontSize: '12px' }} />
         </div>
+      </div>
       </div>
 
       {/* Social Amenities Modal */}
