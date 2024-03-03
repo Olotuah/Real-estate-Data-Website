@@ -45,20 +45,20 @@ const Seen = () => {
         <img
           className="w-[350px] h-[your-desired-height] mx-auto"
           alt=""
-          src="/vector-6.svg"
+          src="./vector-6.svg"
           style={{ marginTop: '-33px', marginLeft: '-23px', position: 'relative' }} // Adjust the styles for the vector icon
         />
         <img
           className="mr-2 w-6 h-6 overflow-hidden"
           alt=""
-          src="/search1.svg"
+          src="./search1.svg"
           style={{ marginTop: '-63px', marginLeft: '-24px' }} // Adjust the styles for the search icon
         />
       </div>
 
       <img
         className="mx-auto rounded-full mt-2 roll-image"
-        src="/componentlottiehttpsassets3lottiefilescomdatafileshjwoxtgnc5ya47tdatajson@2x.png"
+        src="./componentlottiehttpsassets3lottiefilescomdatafileshjwoxtgnc5ya47tdatajson@2x.png"
         alt="Placeholder"
       />
       <hr className="border-t border-teal-700 my-2" />

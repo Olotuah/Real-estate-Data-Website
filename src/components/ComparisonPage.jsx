@@ -17,8 +17,8 @@ const ComparisonRow = ({ label, values, background }) => (
                   alt={value.props.alt}
                   className="w-[80%] max-w-[280px] h-auto rounded-md mr-2"
                 />
-                <img src="/slider.png" alt="slider" className="w-2 h-12 mt-6" />
-                <img src="/cancel.png" alt="cancel" className="w-4 h-4" />
+                <img src="./slider.png" alt="slider" className="w-2 h-12 mt-6" />
+                <img src="./cancel.png" alt="cancel" className="w-4 h-4" />
               </div>
             ) : (
               value
@@ -100,16 +100,16 @@ return (
         label="Utilities"
         values={[
           <div key="pair1" className="image-pair flex items-center">
-            <img src="/Wifi.png" alt="wifi" className="mr-2" />
-            <img src="/p.png" alt="parking" />
+            <img src="./Wifi.png" alt="wifi" className="mr-2" />
+            <img src="./p.png" alt="parking" />
           </div>,
           <div key="pair2" className="image-pair flex items-center">
-            <img src="/Wifi.png" alt="wifi" className="mr-2"/>
-            <img src="/p.png" alt="parking" />
+            <img src="./Wifi.png" alt="wifi" className="mr-2"/>
+            <img src="./p.png" alt="parking" />
           </div>,
           <div key="pair3" className="image-pair flex items-center">
-            <img src="/Wifi.png" alt="wifi" className="mr-2"/>
-            <img src="/p.png" alt="parking" />
+            <img src="./Wifi.png" alt="wifi" className="mr-2"/>
+            <img src="./p.png" alt="parking" />
           </div>
         ]}
         background="#F1F4F7"

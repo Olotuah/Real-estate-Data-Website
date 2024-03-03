@@ -31,20 +31,20 @@ const Fetching = () => {
         <img
           className="w-[314px] h-[your-desired-height] mx-auto"
           alt=""
-          src="/vector-6.svg"
+          src="./vector-6.svg"
           style={{ marginTop: '-44px', marginLeft: '77px', position: 'relative' }} // Adjust the styles for the vector icon
         />
         <img
           className="mr-20 w-6 h-20 overflow-hidden"
           alt=""
-          src="/search1.svg"
+          src="./search1.svg"
           style={{ marginTop: '-70px', marginLeft: '-25px' }} // Adjust the styles for the search icon
         />
       </div>
 
       <img
         className="mx-auto rounded-full mt-2 roll-image"
-        src="/componentlottiehttpsassets3lottiefilescomdatafileshjwoxtgnc5ya47tdatajson@2x.png"
+        src="./componentlottiehttpsassets3lottiefilescomdatafileshjwoxtgnc5ya47tdatajson@2x.png"
         alt="Placeholder"
       />
       <p className="text-teal-700 text-white text-3xl font-manrope font-regular my-2">

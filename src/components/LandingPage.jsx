@@ -48,7 +48,7 @@ const LandingPage = () => {
               className="absolute left-2 top-1/2 transform -translate-y-1/2 h-9 w-9"
               loading="eager"
               alt=""
-              src="/Search.svg"
+              src="./Search.svg"
             />
             <input
               type="text"
