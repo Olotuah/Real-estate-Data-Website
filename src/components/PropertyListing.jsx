@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropertyCard from './PropertyCard';
 import PropertyControls from './PropertyControls';
+import MapComponent from './MapComponent';
 import { Link } from 'react-router-dom';
 import ComparisonModal from './ComparisonModal'; // Import ComparisonModal
 
@@ -9,9 +10,15 @@ const PropertyListing = ({ properties }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProperties, setSelectedProperties] = useState([]);
   const [showModal, setShowModal] = useState(false); // State for showing modal
+  const [selectedProperty, setSelectedProperty] = useState(null);
 
   const handleFilter = (filterOptions) => {
     // Filter logic goes here
+  };
+
+  const handlePriceClick = (property) => {
+    // Set the selected property in the state
+    setSelectedProperty(property);
   };
 
   const handleSearchChange = (event) => {
@@ -75,6 +82,8 @@ const PropertyListing = ({ properties }) => {
           <div>No matching properties found</div>
         )}
       </div>
+
+       
 
       {/* Comparison Modal */}
       {showModal && (
