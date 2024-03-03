@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/klooft/static/css/main.1c9a6978.css",
-    "main.js": "/klooft/static/js/main.59321869.js",
+    "main.js": "/klooft/static/js/main.761f6a4f.js",
     "static/js/787.42cd85f4.chunk.js": "/klooft/static/js/787.42cd85f4.chunk.js",
     "index.html": "/klooft/index.html",
     "main.1c9a6978.css.map": "/klooft/static/css/main.1c9a6978.css.map",
-    "main.59321869.js.map": "/klooft/static/js/main.59321869.js.map",
+    "main.761f6a4f.js.map": "/klooft/static/js/main.761f6a4f.js.map",
     "787.42cd85f4.chunk.js.map": "/klooft/static/js/787.42cd85f4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1c9a6978.css",
-    "static/js/main.59321869.js"
+    "static/js/main.761f6a4f.js"
   ]
 }
