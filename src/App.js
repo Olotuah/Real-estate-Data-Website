@@ -61,7 +61,7 @@ function App() {
   }, []);
 
   return (
-    <Routes basename="/">
+    <Routes>
       <Route path="/" element={<Hero />} />
       <Route path="/Finding" element={<Finding />} />
       <Route path="/Fetching" element={<Fetching />} />
