@@ -13,7 +13,7 @@ import reportWebVitals from './reportWebVitals';
 const root = document.getElementById('root');
 const rootContainer = createRoot(root);
 rootContainer.render(
-  <Router basename="/real-estate">
+  <Router>
     <React.StrictMode>
       <App />
     </React.StrictMode>
