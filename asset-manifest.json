@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/project-klooft/static/css/main.1c9a6978.css",
+    "main.js": "/project-klooft/static/js/main.f46694f1.js",
+    "static/js/787.42cd85f4.chunk.js": "/project-klooft/static/js/787.42cd85f4.chunk.js",
+    "index.html": "/project-klooft/index.html",
+    "main.1c9a6978.css.map": "/project-klooft/static/css/main.1c9a6978.css.map",
+    "main.f46694f1.js.map": "/project-klooft/static/js/main.f46694f1.js.map",
+    "787.42cd85f4.chunk.js.map": "/project-klooft/static/js/787.42cd85f4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c9a6978.css",
+    "static/js/main.f46694f1.js"
+  ]
+}
