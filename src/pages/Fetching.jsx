@@ -44,7 +44,8 @@ const Fetching = () => {
 
       <img
         className="mx-auto rounded-full mt-2 roll-image"
-        src="./componentlottiehttpsassets3lottiefilescomdatafileshjwoxtgnc5ya47tdatajson@2x.png"
+         
+        src={process.env.PUBLIC_URL + "/componentlottiehttpsassets3lottiefilescomdatafileshjwoxtgnc5ya47tdatajson@2x.png"}
         alt="Placeholder"
       />
       <p className="text-teal-700 text-white text-3xl font-manrope font-regular my-2">

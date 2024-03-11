@@ -12,7 +12,7 @@ const Hero = () => {
           className="h-10 w-[59px] relative object-cover"
           loading="eager"
           alt=""
-          src="./imageremovebgpreview-53-1@2x.svg"
+          src={process.env.PUBLIC_URL + "/imageremovebgpreview-53-1@2x.svg"}
         />
       </div>
       <main className="flex flex-col items-start justify-start pt-0 px-5 box-border">
@@ -20,7 +20,7 @@ const Hero = () => {
     <img
       className="w-full h-auto object-cover rounded-[50px]"
       alt=""
-      src="./image-95@2x.png"
+      src={process.env.PUBLIC_URL + "/image-95@2x.png"}
     />
   </div>
 </main>
@@ -29,7 +29,7 @@ const Hero = () => {
         <img
           className="h-6 w-6 relative overflow-hidden shrink-0"
           alt=""
-          src="./category.svg"
+          src={process.env.PUBLIC_URL + "/category.svg"}
         />
       </div>
     </div>
