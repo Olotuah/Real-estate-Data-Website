@@ -1,7 +1,7 @@
 {
   "name": "klooft",
   "version": "0.1.0",
-  "homepage": "https://olotuah.github.io/project-klooft/",
+   
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",
