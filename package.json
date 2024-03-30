@@ -1,11 +1,6 @@
 {
   "name": "klooft",
   "version": "0.1.0",
-<<<<<<< Updated upstream
-   "homepage": "https://olotuah.github.io/project-klooft/",
-=======
-   
->>>>>>> Stashed changes
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",
