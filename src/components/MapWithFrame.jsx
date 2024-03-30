@@ -1,5 +1,0 @@
-// MapWithFrame.jsx
-
- 
-
- 
