@@ -1,98 +1,135 @@
-import React, { useState } from 'react';
+import React, { useState,  useEffect } from 'react';
 import PropertyCard from './PropertyCard';
 import PropertyControls from './PropertyControls';
 import MapComponent from './MapComponent';
 import { Link } from 'react-router-dom';
 import ComparisonModal from './ComparisonModal'; // Import ComparisonModal
 
-const PropertyListing = ({ properties }) => {
-  const [filteredProperties, setFilteredProperties] = useState(properties);
+const PropertyListing = ({ fetchedProperties }) => {
+  const [filteredProperties, setFilteredProperties] = useState(fetchedProperties || []);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedProperties, setSelectedProperties] = useState([]);
-  const [showModal, setShowModal] = useState(false); // State for showing modal
-  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [isCompareClicked, setIsCompareClicked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+   
+  const [selectedProperties, setSelectedProperties] = useState(null);
 
-  const handleFilter = (filterOptions) => {
-    // Filter logic goes here
+  useEffect(() => {
+  if (fetchedProperties) {
+    setFilteredProperties(fetchedProperties);
+  } else {
+    // Handle the case when fetchedProperties is falsy
+    // For example, you could set filteredProperties to an empty array or display an error message
+    setFilteredProperties([]);
+    console.error('Error fetching properties: fetchedProperties is falsy');
+  }
+}, [fetchedProperties]);
+
+
+  const handleApplyFilter = (filterOptions) => {
+  // Filter properties based on the selected filter options
+  let filteredProperties = fetchedProperties.filter((property) => {
+    let matchesFilter = true;
+
+    // Apply location filter
+    if (filterOptions.location) {
+  matchesFilter = matchesFilter && (
+    property.address?.toLowerCase().includes(filterOptions.location.toLowerCase()) ||
+    property.city?.toLowerCase().includes(filterOptions.location.toLowerCase()) ||
+    property.state?.toLowerCase().includes(filterOptions.location.toLowerCase()) ||
+    property.location?.toLowerCase().includes(filterOptions.location.toLowerCase())
+  );
+}
+
+    // Apply listing type filter
+    if (filterOptions.listingType) {
+      matchesFilter = matchesFilter && property.listingType === filterOptions.listingType;
+    }
+
+    // Apply property type filter
+    if (filterOptions.propertyType) {
+      matchesFilter = matchesFilter && property.propertyType === filterOptions.propertyType;
+    }
+
+    // Apply other filters similarly
+
+    return matchesFilter;
+  });
+
+  // Update the filteredProperties state with the filtered results
+  setFilteredProperties(filteredProperties);
+};
+
+// Modify handleSelect function to add property to selectedProperties only if Compare button is clicked
+  const handleSelect = (property) => {
+    if (isCompareClicked) {
+      setSelectedProperties([...selectedProperties, property]);
+    }
   };
 
-  const handlePriceClick = (property) => {
-    // Set the selected property in the state
-    setSelectedProperty(property);
-  };
 
   const handleSearchChange = (event) => {
     const inputValue = event.target.value.toLowerCase();
     setSearchQuery(inputValue);
 
-    const searchResults = properties.filter(
+    const searchResults = fetchedProperties.filter(
       (property) =>
         property.address?.toLowerCase().includes(inputValue) ||
         property.city?.toLowerCase().includes(inputValue) ||
-        property.state?.toLowerCase().includes(inputValue)
+        property.state?.toLowerCase().includes(inputValue) ||
+        property.location?.toLowerCase().includes(inputValue)
     );
 
-    setFilteredProperties(searchResults.length > 0 ? searchResults : []);
+    setFilteredProperties(searchResults);
   };
 
-  const handlePropertySelect = (propertyId) => {
-    const updatedSelectedProperties = selectedProperties.includes(propertyId)
-      ? selectedProperties.filter((id) => id !== propertyId)
-      : [...selectedProperties, propertyId];
 
-    console.log('Updated selected properties:', updatedSelectedProperties);
-    
-    setSelectedProperties(updatedSelectedProperties);
+  // Define handlePriceClick function
+  const handlePriceClick = () => {
+    // Logic for handling price click
   };
 
-  const handleCompare = () => {
-    // Logic for comparison
-    console.log('Comparing properties:', selectedProperties);
-    setShowModal(true); // Show the modal when Compare button is clicked
-  };
+  // Modify the handleCompare function
+const handleCompare = () => {
+  setIsCompareClicked(true);
+};
 
   const handleCloseModal = () => {
-    setShowModal(false); // Hide the modal
+    setShowModal(false);
   };
-
-  console.log('Filtered properties:', filteredProperties);
-  console.log('Selected properties:', selectedProperties);
 
   return (
     <div style={{ margin: '20px' }}>
-      {/* Property Controls */}
       <PropertyControls
-        selectedProperties={selectedProperties} // Pass selectedProperties
-        onFilter={handleFilter}
+        onFilter={handleApplyFilter}
         onSearchChange={handleSearchChange}
-        onCompare={handleCompare} // Pass onCompare here
+        onCompare={handleCompare}
+        isCompareClicked={isCompareClicked}
       />
 
-      {/* Render property listing based on the filteredProperties */}
+      {/* Display search result summary */}
+      {searchQuery && (
+        <div style={{ margin: '20px 0', fontSize: '1.2rem', fontFamily: 'manrope' }}>
+          Showing {filteredProperties.length} active listings of "{searchQuery}"
+        </div>
+      )}
+
       <div className="property-listing">
-        {filteredProperties.map((property) => (
-          <PropertyCard
-            key={property.id}
-            property={property}
-            onSelect={() => handlePropertySelect(property.id)}
-            isSelected={selectedProperties.includes(property.id)}
-          />
-        ))}
-        {filteredProperties.length === 0 && (
+        {filteredProperties.length > 0 ? (
+          filteredProperties.map((property) => (
+            <PropertyCard
+              key={property.id}
+              property={property}
+  
+              onPriceClick={handlePriceClick} // Add this line
+               
+            />
+          ))
+        ) : (
           <div>No matching properties found</div>
         )}
       </div>
 
        
-
-      {/* Comparison Modal */}
-      {showModal && (
-        <ComparisonModal
-          selectedProperties={selectedProperties}
-          onClose={handleCloseModal}
-          properties={[]}
-        />
-      )}
     </div>
   );
 };

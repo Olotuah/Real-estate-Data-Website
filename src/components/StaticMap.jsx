@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, ImageOverlay, Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
+import PropertyCard from './PropertyCard'; // Import PropertyCard component
 
 const StaticMap = ({ latitude, longitude, onPriceClick }) => {
+  const [selectedProperty, setSelectedProperty] = useState(null); // State to store selected property
+
   const map = useMap(); // Access the Leaflet map instance
 
   // Convert geographical coordinates to pixel coordinates
@@ -86,8 +89,11 @@ const StaticMap = ({ latitude, longitude, onPriceClick }) => {
 
   // Function to handle click event on price markers
   const handlePriceClick = (property) => {
-    onPriceClick(property);
-  };
+  // If the clicked property is the same as the selected property, deselect it
+  // Otherwise, select the clicked property
+  setSelectedProperty(selectedProperty === property ? null : property);
+  onPriceClick(property);
+};
 
   return (
     <MapContainer center={[latitude, longitude]} zoom={13} style={{ width: '100%', height: '100%', position: 'relative' }}>
@@ -120,6 +126,13 @@ const StaticMap = ({ latitude, longitude, onPriceClick }) => {
           </div>
         );
       })}
+
+      {/* Render PropertyCard when selectedProperty is not null */}
+      {selectedProperty && (
+        <div style={{ position: 'absolute', top: '50px', left: '50px', zIndex: 10000 }}>
+          <PropertyCard property={selectedProperty} />
+        </div>
+      )}
     </MapContainer>
   );
 };

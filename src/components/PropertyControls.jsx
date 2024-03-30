@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { FaSearch, FaFilter, FaMapMarkedAlt, FaBalanceScale, FaAngleDown, FaAngleUp, FaTimesCircle } from 'react-icons/fa';
 import ComparisonModal from './ComparisonModal'; // Import ComparisonModal
+import { useEffect, useRef } from 'react';
 
-const PropertyControls = ({ onFilter, onShowMap, onSearchChange, selectedProperties }) => {
+
+const PropertyControls = ({ onFilter, onShowMap, onSearchChange, selectedProperties, fetchedProperties, onCompare }) => {
   const [filterOptions, setFilterOptions] = useState({
     propertyType: '',
     location: '',
@@ -18,29 +20,73 @@ const PropertyControls = ({ onFilter, onShowMap, onSearchChange, selectedPropert
   });
 
   const [showFilter, setShowFilter] = useState(false);
+  const [isCompareClicked, setIsCompareClicked] = useState(false);
   const [showModal, setShowModal] = useState(false); // State for showing modal
+  const filterRef = useRef(null); // Ref for the filter dropdown
+
+  useEffect(() => {
+    // Add event listener to handle clicks outside the filter dropdown
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        handleCloseFilter();
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Cleanup function
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+
+  const handleClearSearch = () => {
+  setFilterOptions({ ...filterOptions, location: '' }); // Clear the search query
+  onFilter(fetchedProperties); // Reload properties
+};
+
 
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
     setFilterOptions({ ...filterOptions, [name]: value });
+
+    // Call the handleFilter function to filter properties based on updated filter options
+  onFilter({ ...filterOptions, [name]: value });
   };
 
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
   };
 
-  const handleCompareClick = () => {
-    if (selectedProperties.length < 2) {
-      console.log('Select at least 2 properties to compare');
-    } else {
-      console.log('Comparing properties:', selectedProperties);
-      setShowModal(true); // Show the modal when Compare button is clicked
-    }
-  };
 
-  const handleCloseModal = () => {
-    setShowModal(false); // Hide the modal
-  };
+  const handleApplyFilter = () => {
+    onFilter(filterOptions);
+};
+
+  // Modify handleCompareClick function
+const handleCompareClick = () => {
+  if (isCompareClicked && selectedProperties.length >= 2) {
+    console.log('Comparing properties:', selectedProperties);
+    setShowModal(true); // Show the modal when Compare button is clicked and properties are selected
+  } else {
+    console.log('Select at least 2 properties to compare');
+  }
+};
+
+// Add logic to reset state when closing filter dropdown or modal
+const handleCloseFilter = () => {
+  setShowFilter(false);
+  setIsCompareClicked(false); // Reset Compare button state
+  // Reset other states if needed
+};
+
+  // Update handleCloseModal function to reset the state
+const handleCloseModal = () => {
+  setShowModal(false); // Hide the modal
+  setIsCompareClicked(false); // Reset Compare button state
+}
 
   const handleDecreaseMinAge = () => {
   // Decrease the min age value
@@ -68,46 +114,64 @@ const handleIncreaseMaxAge = () => {
           <FaSearch style={{ fontWeight: 'lighter' }} />
         </div>
 
-        <input
-          type="text"
-          name="location"
-          placeholder="Show me 2 Bedroom flats in Surulere"
-          value={filterOptions.location}
-          onChange={handleFilterChange}
-          onInput={onSearchChange}
+        {/* Dark overlay */}
+      {showFilter && (
+        <div
+          className="dark-overlay"
+          onClick={handleCloseFilter} // Close filter dropdown when clicking on the overlay
           style={{
-            padding: '15px',
-            paddingLeft: '40px',
+            position: 'fixed',
+            top: 0,
+            left: 0,
             width: '100%',
-            border: '1px solid #ddd',
-            borderRadius: '10px',
-            fontFamily: 'Manrope, sans-serif',
-            fontSize: '18px',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.5)', // Dark background color with transparency
+            zIndex: 99, // Ensure overlay appears above other elements
           }}
         />
+      )}
+
+        <input
+  type="text"
+  name="location"
+  placeholder="Show me 2 Bedroom flats in Surulere"
+  value={filterOptions.location}
+  onChange={handleFilterChange}
+  onInput={(event) => onSearchChange(event)} // Use handleSearchChange for onInput event
+  style={{
+    padding: '15px',
+    paddingLeft: '40px',
+    width: '100%',
+    border: '1px solid #ddd',
+    borderRadius: '10px',
+    fontFamily: 'Manrope, sans-serif',
+    fontSize: '18px',
+  }}
+/>
+
+
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
   {/* Show Map Button */}
   <Link to="/MapView" style={{ textDecoration: 'none' }}>
     <button className="show-map-button" style={{ padding: '0.7em', marginRight: '1em', whiteSpace: 'nowrap' }}>
-      <FaMapMarkedAlt style={{ marginRight: '0.5em' }} /> Show Map
+      <img src={`${process.env.PUBLIC_URL}/Map.png`} alt="Map" style={{ marginRight: '0.5em', height: '1em' }} /> Show Map
     </button>
   </Link>
 
   {/* Filter and Compare Buttons */}
-  <div style={{ display: 'flex', gap: '1px' }}>
+  <div style={{ display: 'flex', gap: '1em' }}>
     {/* Compare Button */}
     <button onClick={handleCompareClick} className="compare-button" style={{ padding: '0.7em', marginRight: '1em' }}>
-      <FaBalanceScale style={{ marginRight: '0.5em' }} /> Compare
+      <img src={`${process.env.PUBLIC_URL}/compare.png`} alt="Compare" style={{ marginRight: '0.5em', height: '1em' }} /> Compare
     </button>
     
     {/* Filter Button */}
-    <button onClick={handleFilterClick} className="filter-button" style={{ padding: '1em' }}>
-      <FaFilter style={{ marginRight: '0.5em' }} /> Filter
+    <button onClick={handleFilterClick} className="filter-button" style={{ padding: '0.7em' }}>
+      <img src={`${process.env.PUBLIC_URL}/Filter1.png`} alt="Filter" style={{ marginRight: '0.5em', height: '1em' }} /> Filter
     </button>
   </div>
-
 </div>
 
        
@@ -116,6 +180,7 @@ const handleIncreaseMaxAge = () => {
 {showFilter && (
   <div
     className="filter-dropdown"
+    ref={filterRef} // Ref for the filter dropdown
     style={{
       position: 'fixed', // Change to fixed positioning
       top: '100px', // Adjust as needed
@@ -134,7 +199,7 @@ const handleIncreaseMaxAge = () => {
     {/* Filter Text */}
 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', marginBottom: '30px', position: 'relative' }}>
   {/* Cancel Icon */}
-<span style={{ position: 'absolute', left: 0, cursor: 'pointer' }} onClick={() => setShowFilter(false)}>
+<span style={{ position: 'absolute', left: 0, cursor: 'pointer' }} onClick={handleCloseFilter}>>
   <FaTimesCircle />
 </span>
 
@@ -470,7 +535,7 @@ const handleIncreaseMaxAge = () => {
   </div>
 
   {/* Apply Filter Button */}
-  <button onClick={handleFilterClick} className="apply-filter-button">
+  <button onClick={handleApplyFilter} className="apply-filter-button">
     Show Results
   </button>
 </div>
@@ -483,6 +548,7 @@ const handleIncreaseMaxAge = () => {
       {showModal && (
         <ComparisonModal
           selectedProperties={selectedProperties}
+          isCompareClicked={isCompareClicked}
           onClose={handleCloseModal}
           properties={[]}
         />

@@ -70,19 +70,21 @@ body {
 .property-listing {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 30px;
+  margin-right: 10px;
 }
 
 .property-listing-item {
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
+  transition: box-shadow 0.3s ease;
   transition: transform 0.3s ease-in-out;
-  margin-bottom: 10px; /* Adjust the margin between individual cards */
+
 }
 
 .property-listing-item:hover {
-  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
 }
 
 .property-listing-item img {
@@ -392,6 +394,10 @@ body {
     transform: translateX(-50%);
   }
 }
+
+
+
+
 
 
 
